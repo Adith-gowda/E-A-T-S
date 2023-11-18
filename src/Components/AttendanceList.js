@@ -11,6 +11,7 @@ function Attendance(){
     const [monthdata , setMonthdata] = useState([]);
     let totalworkhours = 0;
     let totalworkdays = 0;
+    let countdays = 0;
 
     useEffect(() => {
         Axios.get("http://localhost:4000/eats/account/"+id)
@@ -21,7 +22,7 @@ function Attendance(){
             console.log(err);
         })
         }
-    , [id]);
+    , [id, month]);
 
 
     const months = {
@@ -74,6 +75,7 @@ function Attendance(){
         totalworkdays = totalworkdays + 1;
     }
 
+
     return(
         <div>
             <div class="bg-primary d-flex justify-content-between py-3 px-3">
@@ -94,8 +96,10 @@ function Attendance(){
                         </tr>
                     </thead>
                     <tbody>
-                        {monthdata.map((val)=>{
-                            if(val.day <= new Date().getDate()){
+                        { monthnum[month] <= new Date().getMonth()+1 ?
+                            monthdata.map((val)=>{
+                            if(monthnum[month] === new Date().getMonth()+1){
+                                if(val.day <= new Date().getDate()){
                             return(
                                 <tr>
                                     <td>{val.day}-{monthnum[month]}-{new Date().getFullYear()}</td>
@@ -114,8 +118,29 @@ function Attendance(){
                                         }
                                     </td>
                                 </tr>
-                            )}
-                        })}
+                            )}}else{
+                                return(
+                                    <tr>
+                                        <td>{val.day}-{monthnum[month]}-{new Date().getFullYear()}</td>
+                                        <td>{details.department}</td>
+                                        <td>{val.checkin}</td>
+                                        <td>{val.checkout}</td>
+                                        <td>{calculateTotalWorkHours(val.checkin,val.checkout).toFixed(3)}</td>
+                                        <td>
+                                            {
+                                                val.checkin === "00:00:00" ? 
+                                                <div>{val.checkout === "00:00:00" ? <div class="btn btn-danger">Absent</div> : <div></div>}</div>
+                                                : 
+                                                <div>{
+                                                    val.checkout === "00:00:00" ? <div class="btn btn-warning">Didnt Check Out</div> :<div>{handlepresent()}<div class="btn btn-success">Present</div></div>
+                                                }</div>
+                                            }
+                                        </td>
+                                    </tr>
+                                )
+                            }
+
+                        }):<td colSpan={6} class="text-center">This months work has not yet started...</td>}
                     </tbody>
                 </table>
             </div>
@@ -133,13 +158,24 @@ function Attendance(){
                             <th scope="col">Count of working hours</th>
                             <th scope="col">Attendance Percentage</th>
                         </tr>
-                        <tr>
-                            <td>{new Date().getDate()}</td>
-                            <td>{totalworkdays}</td>
-                            <td>{new Date().getDate()-totalworkdays}</td>
-                            <td>{totalworkhours.toFixed(3)}</td>
-                            <td>{((totalworkdays/new Date().getDate())*100).toFixed(2)}%</td>
-                        </tr>
+                        { monthnum[month] === new Date().getMonth()+1?
+                            <tr>
+                                <td>{new Date().getDate()}</td>
+                                <td>{totalworkdays}</td>
+                                <td>{new Date().getDate()-totalworkdays}</td>
+                                <td>{totalworkhours.toFixed(3)}</td>
+                                <td>{((totalworkdays/new Date().getDate())*100).toFixed(2)}%</td>
+                            </tr>
+                            :
+                            <tr>
+                                <td>{monthdata.length}</td>
+                                <td>{totalworkdays}</td>
+                                <td>{monthdata.length - totalworkdays}</td>
+                                <td>{totalworkhours.toFixed(3)}</td>
+                                <td>{((totalworkdays/monthdata.length)*100).toFixed(2)}%</td>
+                            </tr>
+                        }
+                        
                     </thead>
                 </table>
             </div>

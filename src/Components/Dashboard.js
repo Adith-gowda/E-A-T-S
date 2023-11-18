@@ -12,7 +12,7 @@ function Dashboard(){
     //
     const {id} = useParams();
     const [username, setUsername] = useState('');
-    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }));
+    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString( 'en-US', { hour: '2-digit', minute: '2-digit' , second: '2-digit' , hour12: false}));
     const [currentDate, setCurrentDate] = useState(new Date());
     const [isPresent, setIsPresent] = useState(false);
 
@@ -37,7 +37,7 @@ function Dashboard(){
         console.log(err);
       })
     }
-    , [id]);
+    , [id, currentDay, currentMonth, months]);
 
     useEffect(() => {
       const intervalId = setInterval(() => {
