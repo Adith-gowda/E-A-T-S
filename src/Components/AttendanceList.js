@@ -11,7 +11,6 @@ function Attendance(){
     const [monthdata , setMonthdata] = useState([]);
     let totalworkhours = 0;
     let totalworkdays = 0;
-    let countdays = 0;
 
     useEffect(() => {
         Axios.get("http://localhost:4000/eats/account/"+id)
@@ -195,5 +194,6 @@ function Attendance(){
         </div>
     );
 }
+
 
 export default Attendance;
