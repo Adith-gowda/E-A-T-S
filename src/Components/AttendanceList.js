@@ -158,6 +158,8 @@ function Attendance(){
                             <th scope="col">Count of working hours</th>
                             <th scope="col">Attendance Percentage</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         { monthnum[month] === new Date().getMonth()+1?
                             <tr>
                                 <td>{new Date().getDate()}</td>
@@ -167,16 +169,24 @@ function Attendance(){
                                 <td>{((totalworkdays/new Date().getDate())*100).toFixed(2)}%</td>
                             </tr>
                             :
-                            <tr>
-                                <td>{monthdata.length}</td>
-                                <td>{totalworkdays}</td>
-                                <td>{monthdata.length - totalworkdays}</td>
-                                <td>{totalworkhours.toFixed(3)}</td>
-                                <td>{((totalworkdays/monthdata.length)*100).toFixed(2)}%</td>
-                            </tr>
+                            <>
+                            {    
+                                monthnum[month] < new Date().getMonth()+1 ?
+                                <tr>
+                                    <td>{monthdata.length}</td>
+                                    <td>{totalworkdays}</td>
+                                    <td>{monthdata.length - totalworkdays}</td>
+                                    <td>{totalworkhours.toFixed(3)}</td>
+                                    <td>{((totalworkdays/monthdata.length)*100).toFixed(2)}%</td>
+                                </tr>
+                                :
+                                <tr>
+                                    <td colSpan={5}>No information yet...</td>
+                                </tr>
+                            }
+                            </>
                         }
-                        
-                    </thead>
+                    </tbody>
                 </table>
             </div>
 
