@@ -10,7 +10,7 @@ function Login(){
     const handleLogin = (e) => {
         e.preventDefault()
         const data = {email,password};
-        Axios.post("http://localhost:4000/eats/login-user",data)
+        Axios.post("https://eatsserver.onrender.com/eats/login-user",data)
         .then((res)=>{
             if(res.data === "user not registered"){
                 alert("Your not our employee");

@@ -11,7 +11,7 @@ function AdminHome() {
     const [userdata, setUserData] = useState([]);
 
     useEffect(() => {
-        Axios.get("http://localhost:4000/eats/adminaccount/"+id)
+        Axios.get("https://eatsserver.onrender.com/eats/adminaccount/"+id)
         .then((res)=>{
             setData(res.data);
         }).catch((err)=>{
@@ -20,7 +20,7 @@ function AdminHome() {
     }, [id])
 
     useEffect(() => {
-        Axios.get("http://localhost:4000/eats/")
+        Axios.get("https://eatsserver.onrender.com/eats/")
         .then((res)=>{
             setUserData(res.data);
         }).catch((err)=>{
@@ -30,7 +30,7 @@ function AdminHome() {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        Axios.delete("http://localhost:4000/eats/delete-user/"+e.target.id)
+        Axios.delete("https://eatsserver.onrender.com/eats/delete-user/"+e.target.id)
         .then((res)=>{
             alert("Employee Deleted");
             window.location.reload();

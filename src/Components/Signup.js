@@ -27,7 +27,7 @@ function Signup(){
   const handleSubmit = (e) => {
       e.preventDefault()
       const data = {username: username, department: department, email: email, phoneNo:phoneno, password: password,jan:jan, feb:feb, mar: mar, apr: apr, may: may, jun: jun, jul: jul, aug: aug, sep: sep, oct: oct, nov: nov, dec: dec};
-      Axios.post("http://localhost:4000/eats/signup-user",data)
+      Axios.post("https://eatsserver.onrender.com/eats/signup-user",data)
       .then((res)=>{
           if(res.data==="user already exists"){
               alert("User already exists");

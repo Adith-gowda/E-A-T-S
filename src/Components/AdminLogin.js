@@ -10,7 +10,7 @@ function AdminLogin(){
     const handleLogin = (e) => {
         e.preventDefault()
         const data = {adminemail,adminpassword};
-        Axios.post("http://localhost:4000/eats/login-admin",data)
+        Axios.post("https://eatsserver.onrender.com/eats/login-admin",data)
         .then((res)=>{
             if(res.data === "Your not the admin"){
                 alert("Your not the admin");

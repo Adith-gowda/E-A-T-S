@@ -13,7 +13,7 @@ function Attendance(){
     let totalworkdays = 0;
 
     useEffect(() => {
-        Axios.get("http://localhost:4000/eats/account/"+id)
+        Axios.get("https://eatsserver.onrender.com/eats/account/"+id)
         .then((res)=>{
             setDetails(res.data);
             setMonthdata(res.data[month]);

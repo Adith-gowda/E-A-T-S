@@ -24,7 +24,7 @@ function Dashboard(){
 
 
     useEffect(() => {
-      Axios.get("http://localhost:4000/eats/checkIn/"+id)
+      Axios.get("https://eatsserver.onrender.com/eats/checkIn/"+id)
       .then((res)=>{
         // console.log(res.data[months[currentMonth]][currentDay-1].checkin);
         if(res.data[months[currentMonth]][currentDay-1].checkin !== "00:00:00"){
@@ -55,7 +55,7 @@ function Dashboard(){
     };
 
     useEffect(() => {
-      Axios.get("http://localhost:4000/eats/account/"+id)
+      Axios.get("https://eatsserver.onrender.com/eats/account/"+id)
       .then((res)=>{
           setUsername(res.data.username);
       }).catch((err)=>{
@@ -66,7 +66,7 @@ function Dashboard(){
 
     const handleCheckIn = () => {
       const data = {day: currentDay, month: months[currentMonth], checkin: currentTime};
-      Axios.put("http://localhost:4000/eats/checkIn/"+id, data)
+      Axios.put("https://eatsserver.onrender.com/eats/checkIn/"+id, data)
         .then((res)=>{
           if(res.data === "already checked in")
           {
@@ -82,7 +82,7 @@ function Dashboard(){
 
     const handleCheckOut = () => {
       const data = {day: currentDay, month: months[currentMonth], checkout: currentTime};
-      Axios.put("http://localhost:4000/eats/checkOut/"+id, data)
+      Axios.put("https://eatsserver.onrender.com/eats/checkOut/"+id, data)
         .then((res)=>{
           if(res.data === "already checked out")
           {

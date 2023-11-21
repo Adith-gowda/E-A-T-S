@@ -15,7 +15,7 @@ function AttendanceSummary() {
     const [phoneNo, setPhone] = useState('');
 
     useEffect(() => {
-      Axios.get("http://localhost:4000/eats/account/"+id)
+      Axios.get("https://eatsserver.onrender.com/eats/account/"+id)
       .then((res)=>{
           setUsername(res.data.username);
           setDepartment(res.data.department);

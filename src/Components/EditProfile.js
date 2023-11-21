@@ -12,7 +12,7 @@ function EditProfile(){
     const [phoneNo, setPhoneNo] = useState("");
 
     useEffect(()=>{
-        Axios.get("http://localhost:4000/eats/account/"+id)
+        Axios.get("https://eatsserver.onrender.com/eats/account/"+id)
         .then((res)=>{
             setUsername(res.data.username);
             setDepartment(res.data.department);
@@ -26,7 +26,7 @@ function EditProfile(){
     const handleSubmit = (e) =>{
         e.preventDefault();
         const data = {username:username,department:department,email:email,phoneNo:phoneNo}
-        Axios.put("http://localhost:4000/eats/update-user/"+id,data)
+        Axios.put("https://eatsserver.onrender.com/eats/update-user/"+id,data)
         .then((res)=>{
             alert("record updated successfully");
             window.location.href="/user-profile/"+id;

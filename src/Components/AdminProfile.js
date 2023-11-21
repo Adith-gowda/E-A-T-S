@@ -13,7 +13,7 @@ function AdminProfile(){
   const [adminphone, setPhoneNo] = useState('');
 
   useEffect(() => {
-    Axios.get("http://localhost:4000/eats/adminaccount/"+id)
+    Axios.get("https://eatsserver.onrender.com/eats/adminaccount/"+id)
     .then((res)=>{
         setUsername(res.data.adminname);
         setAge(res.data.adminage);
